@@ -4,26 +4,38 @@ from schemas import TaskCreate, TaskUpdate
 import sqlite3 # Importamos la libreria sqlite3
 
 
-def get_tasks(db: Session):
-    """
-    Input:
-        db: database session
-    Output:
-        List all tasks
-    """
-    # TODO: El vostre codi va aqui
-    pass
+import sqlite3
+
+def get_tasks():
+    # Connexió a la base de dades
+    conn = sqlite3.connect('tasks.db')
+    cursor = conn.cursor()
+
+    # Consulta per obtenir totes les tasques
+    cursor.execute("SELECT * FROM tasks")
+    tasks = cursor.fetchall()
+
+    # Tancar la connexió
+    conn.close()
+
+    return tasks
 
 
-def create_tasks(db: Session, task: TaskCreate):
-    """
-    Input:
-        db: database session
-    Output:
-        Return the new task
-    """
-    # TODO: El vostre codi va aqui
-    pass
+
+def create_task(task_name, task_description):
+    # Connexió a la base de dades
+    conn = sqlite3.connect('tasks.db')
+    cursor = conn.cursor()
+
+    # Inserir la tasca a la taula de tasques
+    cursor.execute("INSERT INTO tasks (name, description) VALUES (?, ?)", (task_name, task_description))
+
+    # Guardar els canvis
+    conn.commit()
+
+    # Tancar la connexió
+    conn.close()
+
 
 
 def update_task(task_id, new_name, new_description):
