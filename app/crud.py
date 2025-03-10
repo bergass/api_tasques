@@ -39,7 +39,7 @@ def create_task(task_name, task_description):
 
 
 def update_task(task_id, new_name, new_description):
-    # Nos conectamos a la base de datos
+    # Nos conectamos a la base de datoss
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor() # Creamos un cursor, para poder ejecutar ordenes
 
